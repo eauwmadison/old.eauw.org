@@ -13,14 +13,7 @@
     <link href="css/elements.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
   </head>
-  <body id="root-container" style="margin: 0">
-    <div
-      data-element-behavior="menu"
-      id="nav-id-4-"
-      data-element-type="section"
-    >
-      <div id="container-id-5-" data-element-type="container"></div>
-    </div>
+  <body id="root-container" style="margin: 0" onload="initAspectJS()">
     <div id="content-container">
       <div id="section-id-1-" data-element-type="section">
         <div id="container-id-2-" data-element-type="container">
@@ -32,9 +25,15 @@
               <div id="container-id-7-" data-element-type="container"></div>
               <div id="container-id-4-" data-element-type="container">
                 <p id="text-id-3-" data-element-type="text">
-                  contact@eauwmadison.org<br />
+                  contact@eauw.org<br />
                 </p>
-                <p id="text-id-6-" data-element-type="text">@BuckyEA</p>
+                <a
+                  data-element-behavior="dropdown"
+                  id="button-id-49-"
+                  data-element-type="button"
+                  href="#"
+                  ><span id="element-id-50-">@BuckyEA</span></a
+                >
               </div>
             </div>
           </div>
@@ -45,15 +44,18 @@
             <div id="container-id-8-" data-element-type="container">
               <p id="text-id-7-" data-element-type="text">About</p>
               <p id="text-id-2-" data-element-type="text">
-                Effective Altruism UW&ndash;Madison seeks to promote the global
-                movement of effective altruism, the project of using evidence
-                and reason to figure out how to benefit others as much as
-                possible and taking action based on the findings.
+                We are a community of UW&ndash;Madison students unified by a common
+                desire to do the <span id="element-id-12-">most we can</span> to
+                improve the world. Our organization seeks to promote the global
+                movement of effective altruism, using evidence and reason to
+                assess how to benefit others as much as possible and taking
+                action based on the findings.
               </p>
               <a
                 id="button-id-0-"
                 data-element-type="button"
                 href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism/"
+                target="_blank"
                 ><span id="element-id-0-"
                   >Learn more about Effective Altruism</span
                 ></a
@@ -62,16 +64,32 @@
           </div>
           <div id="container-id-20-" data-element-type="container">
             <div id="container-id-15-" data-element-type="container">
-              <p id="text-id-16-" data-element-type="text">Join<br /></p>
-              <p id="text-id-17-" data-element-type="text">
-                Vestibulum elementum sociosqu dis imperdiet justo condimentum
-                lectus blandit diam lacus nibh augue risus rhoncus sagittis
-                vulputate nisi tincidunt class
+              <p id="text-id-16-" data-element-type="text">
+                Get Involved<br />
               </p>
+              <p id="text-id-17-" data-element-type="text">
+                Feel free to attend any upcoming meetings to learn more about
+                our organization and EA concepts! You can also directly engage
+                with us using the links below.
+              </p>
+              <a
+                id="button-id-7-"
+                data-element-type="button"
+                href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism/"
+                ><span id="element-id-6-">Slack</span></a
+              ><a
+                id="button-id-11-"
+                data-element-type="button"
+                href="https://www.effectivealtruism.org/articles/introduction-to-effective-altruism/"
+                ><span id="element-id-10-">GroupMe</span></a
+              >
             </div>
-            <a id="image-id-13-" data-element-type="image"
-              ><img id="element-id-14-" src="img/-project-image-0.jpeg"
-            /></a>
+            <div id="container-id-28-" data-element-type="container">
+              <p id="text-id-25-" data-element-type="text">
+                Upcoming Events<br />
+              </p>
+              <p id="text-id-27-" data-element-type="text">// todo: gcal api</p>
+            </div>
           </div>
           <div id="container-id-16-" data-element-type="container">
             <div id="container-id-11-" data-element-type="container"></div>
@@ -87,10 +105,90 @@
                   ><span id="element-id-1-">effectivealtruism.org</span></a
                 >
               </div>
+              <div id="container-id-9-" data-element-type="container">
+                <div
+                  data-element-behavior="form"
+                  id="form-id-30-"
+                  data-element-type="section"
+                >
+                  <form
+                    id="container-id-25-"
+                    data-element-type="container"
+                    onsubmit="return submitAspectForm(this)"
+                    data-uid="eHhKTYIADFdmMxm2GFYI6lC5z7v1"
+                  >
+                    <p id="text-id-1-" data-element-type="text">
+                      Stay up-to-date!
+                    </p>
+                    <input
+                      id="input-id-27-"
+                      data-element-type="input"
+                      placeholder="Email"
+                      type="email"
+                      required="true"
+                    /><button
+                      id="button-id-28-"
+                      data-element-type="button"
+                      type="submit"
+                    >
+                      <span id="element-id-29-">Subscribe</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div
+      id="button-id-49-popover"
+      data-element-type="dropdown"
+      data-popover-for="button-id-49-"
+      class="dropdown"
+      style="display: none"
+    >
+      <div id="element-id-51-">
+        <a
+          id="link-id-52-"
+          data-element-type="link"
+          data-item-of="button-id-49-popover"
+          spellcheck="false"
+          contenteditable="false"
+          href="https://instagram.com"
+          target="_blank"
+          >Instagram</a
+        ><a
+          id="link-id-53-"
+          data-element-type="link"
+          data-item-of="button-id-49-popover"
+          spellcheck="false"
+          contenteditable="false"
+          href="https://twitter.com"
+          target="_blank"
+          >Twitter</a
+        ><a
+          id="link-id-66-"
+          data-element-type="link"
+          data-item-of="button-id-49-popover"
+          spellcheck="false"
+          contenteditable="false"
+          href="https://facebook.com"
+          target="_blank"
+          >Facebook</a
+        ><a
+          id="link-id-70-"
+          data-element-type="link"
+          data-item-of="button-id-49-popover"
+          spellcheck="false"
+          contenteditable="false"
+          href="https://linkedin.com"
+          target="_blank"
+          >LinkedIn</a
+        >
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
