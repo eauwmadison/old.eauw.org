@@ -1,27 +1,61 @@
 const elementTypes = {
-  CONTAINER: 'container',
-  IMAGE: 'image',
-  TEXT: 'text',
-  BUTTON: 'button',
-  INPUT: 'input',
-  SECTION: 'section',
-  DROPDOWN: 'dropdown',
-  LINK: 'link',
+  CONTAINER: "container",
+  IMAGE: "image",
+  TEXT: "text",
+  BUTTON: "button",
+  INPUT: "input",
+  SECTION: "section",
+  DROPDOWN: "dropdown",
+  LINK: "link",
 };
 
 const elementBehaviors = {
-  DROPDOWN: 'dropdown',
+  DROPDOWN: "dropdown",
 };
 
+function getCalendarEvents() {
+  const CALENDAR_ID = "contact%40eauw.org";
+  const API_KEY = "AIzaSyDZaZSBkC1GCorg-PhrzswIaCQ4aOmOr24"; // read-only, restricted to https://eauw.org
+
+  fetch(
+    "https://www.googleapis.com/calendar/v3/calendars/" +
+      CALENDAR_ID +
+      "/events?key=" +
+      API_KEY
+  )
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      } else {
+        somethingWentWrong("response invalid.");
+      }
+    })
+    .then(function (data) {
+      console.log(data.items);
+    })
+    .catch(function (err) {
+      somethingWentWrong(err);
+    });
+}
+
+getCalendarEvents();
+
+function somethingWentWrong(err) {
+  const textDiv = document.getElementById("text-id-27-");
+  textDiv.innerHTML =
+    "Something went wrong when connecting to Google Calendar... " + err;
+  textDiv.setAttribute("style", "font-style: italic;");
+}
+
 function initAspectJS() {
-  getNestedElements(document.body).forEach(x => {
+  getNestedElements(document.body).forEach((x) => {
     if (getElementBehavior(x) === elementBehaviors.DROPDOWN) {
       setBehaviorForElement(x, elementBehaviors.DROPDOWN);
     }
   });
 
   window.onresize = () => {
-    getNestedElements(document.body).forEach(x => {
+    getNestedElements(document.body).forEach((x) => {
       if (getElementType(x) === elementTypes.DROPDOWN) {
         x.style.position = bestCSSPositionForPopover(getElementForPopover(x));
       }
@@ -47,21 +81,21 @@ function setBehaviorForElement(element, behavior) {
 
       if (!didSetMouseEvents) {
         const popover = getElementPopover(element);
-        popover.onmouseenter = e => {
+        popover.onmouseenter = (e) => {
           shouldShowPopover = true;
           const popover = e.target;
           if (popover.parentElement == document.body) return;
-          popover.style.display = 'block';
+          popover.style.display = "block";
         };
-        popover.onmouseleave = e => {
+        popover.onmouseleave = (e) => {
           shouldShowPopover = false;
           const popover = e.target;
           setTimeout(() => {
             if (shouldShowPopover) return;
-            popover.style.display = 'none';
+            popover.style.display = "none";
           });
         };
-        const touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+        const touchEvent = "ontouchstart" in window ? "touchstart" : "click";
         element.addEventListener(touchEvent, () => {
           if (isElementDropdownVisible(element)) {
             hideDropdownForElement(element);
@@ -77,7 +111,7 @@ function setBehaviorForElement(element, behavior) {
       setTimeout(() => {
         if (shouldShowPopover) return;
         const popover = getElementPopover(element);
-        popover.style.display = 'none';
+        popover.style.display = "none";
       }, 100);
     };
   }
@@ -90,7 +124,7 @@ function removeBehaviorForElement(element) {
 
 function isElementDropdownVisible(element) {
   const popover = getElementPopover(element);
-  return popover && popover.style.display !== 'none';
+  return popover && popover.style.display !== "none";
 }
 
 function getElementPopover(element) {
@@ -100,16 +134,16 @@ function getElementPopover(element) {
 }
 
 function getElementForPopover(popover) {
-  return document.getElementById(popover.getAttribute('data-popover-for'));
+  return document.getElementById(popover.getAttribute("data-popover-for"));
 }
 
 function popoverIDForElement(element) {
   if (!element) return;
-  return element.id + 'popover';
+  return element.id + "popover";
 }
 
 function updateDropdownForElement(element) {
-  const elementIsVisible = element.style.display === 'block';
+  const elementIsVisible = element.style.display === "block";
   if (isElementDropdownVisible(element) && elementIsVisible) {
     showDropdownForElement(element);
   } else if (!elementIsVisible) {
@@ -121,7 +155,7 @@ function showDropdownForElement(element) {
   if (getElementBehavior(element) !== elementBehaviors.DROPDOWN) return;
   const popover = getElementPopover(element);
   moveElementToTopOfHierarchy(popover);
-  popover.style.display = 'block';
+  popover.style.display = "block";
   const rectString = rectForPopover(element, popover);
   popover.style.left = rectString.x;
   popover.style.top = rectString.y;
@@ -137,7 +171,7 @@ function showDropdownForElement(element) {
 function hideDropdownForElement(element) {
   const popover = getElementPopover(element);
   if (!popover) return;
-  popover.style.display = 'none';
+  popover.style.display = "none";
 }
 
 function rectForPopover(element, popover) {
@@ -149,7 +183,7 @@ function rectForPopover(element, popover) {
     y: elementRect.y + elementRect.height,
   };
 
-  let position = 'none';
+  let position = "none";
   if (popoverWidth >= canvasRect.width) {
     // width too large
     rect.x = canvasRect.x;
@@ -161,15 +195,15 @@ function rectForPopover(element, popover) {
   ) {
     // center align is valid
     rect.x = elementRect.x + elementRect.width / 2 - popoverWidth / 2;
-    position = 'center';
+    position = "center";
   } else if (elementRect.x + popoverWidth < canvasRect.width + canvasRect.x) {
     // right align valid
     rect.x = elementRect.x;
-    position = 'right';
+    position = "right";
   } else if (elementRect.x + elementRect.width - popoverWidth > canvasRect.x) {
     // left align valid
     rect.x = elementRect.x + elementRect.width - popoverWidth;
-    position = 'left';
+    position = "left";
   }
 
   return {
@@ -181,18 +215,18 @@ function rectForPopover(element, popover) {
 }
 
 function numToPixel(number) {
-  return number + 'px';
+  return number + "px";
 }
 
 function getElementType(element) {
-  return element.getAttribute('data-element-type');
+  return element.getAttribute("data-element-type");
 }
 
 function getNestedElements(element) {
   const children = [];
-  Array.from(element.children).forEach(child => {
+  Array.from(element.children).forEach((child) => {
     children.push(child);
-    getNestedElements(child).forEach(nestedChild => {
+    getNestedElements(child).forEach((nestedChild) => {
       children.push(nestedChild);
     });
   });
@@ -200,7 +234,7 @@ function getNestedElements(element) {
 }
 
 function getElementBehavior(element) {
-  return element.getAttribute('data-element-behavior');
+  return element.getAttribute("data-element-behavior");
 }
 
 function bestCSSPositionForPopover(element) {
@@ -209,8 +243,8 @@ function bestCSSPositionForPopover(element) {
   while (currentElement && !val) {
     const position = window.getComputedStyle(currentElement).position;
     switch (position) {
-      case 'fixed':
-      case 'absolute':
+      case "fixed":
+      case "absolute":
         val = position;
         break;
       default:
@@ -219,7 +253,7 @@ function bestCSSPositionForPopover(element) {
     currentElement = currentElement.parentElement;
   }
   if (!val) {
-    val = 'absolute';
+    val = "absolute";
   }
   return val;
 }
@@ -228,19 +262,19 @@ function bestCSSPositionForPopover(element) {
 
 function submitAspectForm(form) {
   const data = {
-    databaseId: form.getAttribute('data-database-id'),
-    uid: form.getAttribute('data-uid'),
+    databaseId: form.getAttribute("data-database-id"),
+    uid: form.getAttribute("data-uid"),
     content: {},
   };
 
   if (!data.databaseId) {
-    alert('No database connected to form.');
+    alert("No database connected to form.");
     return false;
   }
 
   const inputWithUnsetDatabaseField = Array.from(
-    form.getElementsByTagName('input')
-  ).find(x => !x.getAttribute('data-name'));
+    form.getElementsByTagName("input")
+  ).find((x) => !x.getAttribute("data-name"));
   if (inputWithUnsetDatabaseField) {
     alert(
       `Input element "${inputWithUnsetDatabaseField.id}" is not connected to a database field.`
@@ -248,15 +282,15 @@ function submitAspectForm(form) {
     return false;
   }
 
-  Array.from(form.getElementsByTagName('input')).forEach(input => {
-    data.content[input.getAttribute('data-name')] = input.value;
+  Array.from(form.getElementsByTagName("input")).forEach((input) => {
+    data.content[input.getAttribute("data-name")] = input.value;
   });
 
   postRequest(getUrlForType(), data)
     .then(() => {
-      updateAspectFormState(form, 'submitted');
+      updateAspectFormState(form, "submitted");
     })
-    .catch(error => alert(error.message));
+    .catch((error) => alert(error.message));
 
   return false;
 
@@ -273,8 +307,8 @@ function submitAspectForm(form) {
   function postRequest(url, dict) {
     return new Promise((resolve, reject) => {
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', url, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify(dict));
       xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
@@ -284,7 +318,7 @@ function submitAspectForm(form) {
             try {
               reject(JSON.parse(xhr.responseText));
             } catch (error) {
-              reject({message: xhr.responseText});
+              reject({ message: xhr.responseText });
             }
           }
         }
@@ -294,8 +328,8 @@ function submitAspectForm(form) {
 }
 
 function updateAspectFormState(form, state) {
-  form.parentElement.classList.remove('submitted-form');
-  if (state == 'submitted') {
-    form.parentElement.classList.add('submitted-form');
+  form.parentElement.classList.remove("submitted-form");
+  if (state == "submitted") {
+    form.parentElement.classList.add("submitted-form");
   }
 }
