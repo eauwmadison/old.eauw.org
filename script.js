@@ -31,7 +31,15 @@ function getCalendarEvents() {
       }
     })
     .then(function (data) {
-      console.log(data.items);
+      if (data.items.length === 0) {
+        const textDiv = document.getElementById("text-id-27-");
+        textDiv.innerHTML =
+          "No events for now. Check back later!";
+        textDiv.setAttribute("style", "display: block;");
+      }
+      for (var i; i < data.items.length; i++) {
+
+      }
     })
     .catch(function (err) {
       somethingWentWrong(err);
@@ -44,7 +52,7 @@ function somethingWentWrong(err) {
   const textDiv = document.getElementById("text-id-27-");
   textDiv.innerHTML =
     "Something went wrong when connecting to Google Calendar... " + err;
-  textDiv.setAttribute("style", "font-style: italic;");
+  textDiv.setAttribute("style", "display: block; font-style: italic;");
 }
 
 function initAspectJS() {
