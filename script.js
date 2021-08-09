@@ -55,27 +55,24 @@ function getCalendarEvents() {
       );
 
       for (var i = 0; i < data.items.length; i++) {
+        const eventDate = new Date(data.items[i].start.dateTime);
+
         // if earlier than today, skip
-        if (today > new Date(data.items[i].start.dateTime)) continue;
+        if (today > eventDate) continue;
 
         if (!eventsList.hasChildNodes()) {
           const firstEventMonth = document.createElement("div");
           firstEventMonth.className = "event-month";
-          currentMonth = new Date(data.items[i].start.dateTime).toLocaleString(
-            "default",
-            {
-              month: "long",
-            }
-          );
+          currentMonth = eventDate.toLocaleString("default", {
+            month: "long",
+          });
           firstEventMonth.innerHTML = currentMonth;
           eventsList.appendChild(firstEventMonth);
 
-          const eventDate = document.createElement("div");
-          eventDate.className = "event-date";
-          currentDay = new Date(
-            data.items[i].start.dateTime
-          ).toLocaleString("default", { day: "numeric" });
-          eventDate.innerHTML = currentDay;
+          const eventDay = document.createElement("div");
+          eventDay.className = "event-day";
+          currentDay = eventDate.toLocaleString("default", { day: "numeric" });
+          eventDay.innerHTML = currentDay;
 
           const eventTitle = document.createElement("span");
           eventTitle.className = "event-title";
@@ -91,9 +88,10 @@ function getCalendarEvents() {
 
           const eventTime = document.createElement("span");
           eventTime.className = "event-time";
-          eventTime.innerHTML = new Date(
-            data.items[i].start.dateTime
-          ).getTime();
+          eventTime.innerHTML = eventDate.toLocaleTimeString("en-US", {
+            timeZone: "America/Chicago",
+            timeStyle: "short",
+          });
 
           const eventInfo = document.createElement("div");
           eventInfo.className = "event-info";
@@ -106,7 +104,7 @@ function getCalendarEvents() {
 
           const event = document.createElement("li");
           event.className = "event";
-          event.append(eventDate, eventInfo);
+          event.append(eventDay, eventInfo);
 
           const innerMonthList = document.createElement("ul");
           innerMonthList.className = "month-events";
