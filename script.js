@@ -33,12 +33,103 @@ function getCalendarEvents() {
     .then(function (data) {
       if (data.items.length === 0) {
         const textDiv = document.getElementById("text-id-27-");
-        textDiv.innerHTML =
-          "No events for now. Check back later!";
+        textDiv.innerHTML = "No events for now. Check back later!";
         textDiv.setAttribute("style", "display: block;");
+        return;
       }
-      for (var i; i < data.items.length; i++) {
 
+      console.log(data.items);
+
+      const eventsParent = document.getElementsByClassName("events")[0];
+      const eventsList = document.createElement("li");
+      eventsParent.appendChild(eventsList);
+
+      const today = new Date();
+      var currentDay = new Date(data.items[0].start.dateTime).toLocaleString(
+        "default",
+        { day: "numeric" }
+      );
+      var currentMonth = new Date(data.items[0].start.dateTime).toLocaleString(
+        "default",
+        { month: "long" }
+      );
+
+      for (var i = 0; i < data.items.length; i++) {
+        // if earlier than today, skip
+        if (today > new Date(data.items[i].start.dateTime)) continue;
+
+        if (!eventsList.hasChildNodes()) {
+          const firstEventMonth = document.createElement("div");
+          firstEventMonth.className = "event-month";
+          currentMonth = new Date(data.items[i].start.dateTime).toLocaleString(
+            "default",
+            {
+              month: "long",
+            }
+          );
+          firstEventMonth.innerHTML = currentMonth;
+          eventsList.appendChild(firstEventMonth);
+
+          const eventDate = document.createElement("div");
+          eventDate.className = "event-date";
+          currentDay = new Date(
+            data.items[i].start.dateTime
+          ).toLocaleString("default", { day: "numeric" });
+          eventDate.innerHTML = currentDay;
+
+          const eventTitle = document.createElement("span");
+          eventTitle.className = "event-title";
+          eventTitle.innerHTML = data.items[i].summary;
+
+          const eventLocation = document.createElement("span");
+          eventLocation.className = "event-location";
+          eventLocation.innerHTML = data.items[i].location;
+
+          const eventDescription = document.createElement("span");
+          eventDescription.className = "event-description";
+          eventDescription.innerHTML = data.items[i].description;
+
+          const eventTime = document.createElement("span");
+          eventTime.className = "event-time";
+          eventTime.innerHTML = new Date(
+            data.items[i].start.dateTime
+          ).getTime();
+
+          const eventInfo = document.createElement("div");
+          eventInfo.className = "event-info";
+          eventInfo.append(
+            eventTitle,
+            eventLocation,
+            eventDescription,
+            eventTime
+          );
+
+          const event = document.createElement("li");
+          event.className = "event";
+          event.append(eventDate, eventInfo);
+
+          const innerMonthList = document.createElement("ul");
+          innerMonthList.className = "month-events";
+          innerMonthList.appendChild(event);
+          eventsList.appendChild(innerMonthList);
+
+          continue;
+        }
+
+        // if day is same as current day, don't add a new day
+
+        // if month is same as current month, don't add a new month
+
+        // print month
+        // print day
+      }
+
+      if (!eventsList.hasChildNodes()) {
+        document.getElementsByClassName("events")[0].remove();
+        const textDiv = document.getElementById("text-id-27-");
+        textDiv.innerHTML = "No events for now. Check back later!";
+        textDiv.setAttribute("style", "display: block;");
+        return;
       }
     })
     .catch(function (err) {

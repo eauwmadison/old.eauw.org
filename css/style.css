@@ -339,7 +339,7 @@
 
 #container-id-20- > * { max-width: 100%; margin-right: 0px !important; margin-bottom: 20px !important; }
 
-#container-id-20- > :last-child, #container-id-20- > .last-child { margin-right: 0px !important; margin-bottom: 0px !important; }
+#container-id-20- > :last-child, #container-id-20- > .last-child { margin-top: 30px; margin-right: 0px !important; margin-bottom: 0px !important; }
 
 #email-form { flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 20px 0px; }
 
@@ -408,7 +408,7 @@
 
 #text-id-7- { letter-spacing: 0px; line-height: 32px; font-size: 24px; width: 248px; }}
 
-.events {
+.events, .month-events {
     list-style: none;
     margin-left: 0;
     margin-top: 0;
@@ -419,11 +419,17 @@
     display: flex;
 }
 
+.event-month {
+    /* text-transform: uppercase; */
+    font-size: 1.2em;
+    margin-bottom: 0.75rem;
+}
+
 .event .event-date {
     font-size: 2rem;
     line-height: .9;
     text-align: right;
-    min-width: 3rem;
+    /* min-width: 3rem; */
     padding-right: 1rem;
 }
 
