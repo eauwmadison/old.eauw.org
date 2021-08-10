@@ -417,6 +417,7 @@
 
 .event {
     display: flex;
+    margin-bottom: 1rem;
 }
 
 .event-month {

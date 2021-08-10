@@ -45,16 +45,15 @@ function getCalendarEvents() {
       eventsParent.appendChild(eventsList);
 
       const today = new Date();
-      var currentDay = new Date(data.items[0].start.dateTime).toLocaleString(
-        "default",
-        { day: "numeric" }
-      );
       var currentMonth = new Date(data.items[0].start.dateTime).toLocaleString(
         "default",
         { month: "long" }
       );
 
+      var printedEventsCount = 0;
       for (var i = 0; i < data.items.length; i++) {
+        if (printedEventsCount > 4) break;
+
         const eventDate = new Date(data.items[i].start.dateTime);
 
         // if earlier than today, skip
@@ -74,17 +73,27 @@ function getCalendarEvents() {
           currentDay = eventDate.toLocaleString("default", { day: "numeric" });
           eventDay.innerHTML = currentDay;
 
+          const eventInfo = document.createElement("div");
+          eventInfo.className = "event-info";
+
           const eventTitle = document.createElement("span");
           eventTitle.className = "event-title";
           eventTitle.innerHTML = data.items[i].summary;
+          eventInfo.append(eventTitle);
 
           const eventLocation = document.createElement("span");
           eventLocation.className = "event-location";
-          eventLocation.innerHTML = data.items[i].location;
+          if ("location" in data.items[i]) {
+            eventLocation.innerHTML = data.items[i].location;
+            eventInfo.append(eventLocation);
+          }
 
           const eventDescription = document.createElement("span");
           eventDescription.className = "event-description";
-          eventDescription.innerHTML = data.items[i].description;
+          if ("description" in data.items[i]) {
+            eventDescription.innerHTML = data.items[i].description;
+            eventInfo.append(eventDescription);
+          }
 
           const eventTime = document.createElement("span");
           eventTime.className = "event-time";
@@ -92,15 +101,7 @@ function getCalendarEvents() {
             timeZone: "America/Chicago",
             timeStyle: "short",
           });
-
-          const eventInfo = document.createElement("div");
-          eventInfo.className = "event-info";
-          eventInfo.append(
-            eventTitle,
-            eventLocation,
-            eventDescription,
-            eventTime
-          );
+          eventInfo.append(eventTime);
 
           const event = document.createElement("li");
           event.className = "event";
@@ -109,21 +110,123 @@ function getCalendarEvents() {
           const innerMonthList = document.createElement("ul");
           innerMonthList.className = "month-events";
           innerMonthList.appendChild(event);
+          printedEventsCount++;
+
           eventsList.appendChild(innerMonthList);
 
           continue;
         }
 
-        // if day is same as current day, don't add a new day
-
         // if month is same as current month, don't add a new month
+        if (
+          currentMonth ===
+          eventDate.toLocaleString("default", { month: "long" })
+        ) {
+          const innerMonthList = document.querySelectorAll(
+            ".month-events:last-child"
+          );
 
-        // print month
-        // print day
+          const eventDay = document.createElement("div");
+          eventDay.className = "event-day";
+          currentDay = eventDate.toLocaleString("default", { day: "numeric" });
+          eventDay.innerHTML = currentDay;
+
+          const eventInfo = document.createElement("div");
+          eventInfo.className = "event-info";
+
+          const eventTitle = document.createElement("span");
+          eventTitle.className = "event-title";
+          eventTitle.innerHTML = data.items[i].summary;
+          eventInfo.append(eventTitle);
+
+          const eventLocation = document.createElement("span");
+          eventLocation.className = "event-location";
+          if ("location" in data.items[i]) {
+            eventLocation.innerHTML = data.items[i].location;
+            eventInfo.append(eventLocation);
+          }
+
+          const eventDescription = document.createElement("span");
+          eventDescription.className = "event-description";
+          if ("description" in data.items[i]) {
+            eventDescription.innerHTML = data.items[i].description;
+            eventInfo.append(eventDescription);
+          }
+
+          const eventTime = document.createElement("span");
+          eventTime.className = "event-time";
+          eventTime.innerHTML = eventDate.toLocaleTimeString("en-US", {
+            timeZone: "America/Chicago",
+            timeStyle: "short",
+          });
+          eventInfo.append(eventTime);
+
+          const event = document.createElement("li");
+          event.className = "event";
+          event.append(eventDay, eventInfo);
+          innerMonthList[0].appendChild(event);
+          printedEventsCount++;
+        } else {
+          const eventMonth = document.createElement("div");
+          eventMonth.className = "event-month";
+          currentMonth = eventDate.toLocaleString("default", {
+            month: "long",
+          });
+          eventMonth.innerHTML = currentMonth;
+          eventsList.appendChild(eventMonth);
+
+          const eventDay = document.createElement("div");
+          eventDay.className = "event-day";
+          currentDay = eventDate.toLocaleString("default", { day: "numeric" });
+          eventDay.innerHTML = currentDay;
+
+          const eventInfo = document.createElement("div");
+          eventInfo.className = "event-info";
+
+          const eventTitle = document.createElement("span");
+          eventTitle.className = "event-title";
+          eventTitle.innerHTML = data.items[i].summary;
+          eventInfo.append(eventTitle);
+
+          const eventLocation = document.createElement("span");
+          eventLocation.className = "event-location";
+          if ("location" in data.items[i]) {
+            eventLocation.innerHTML = data.items[i].location;
+            eventInfo.append(eventLocation);
+          }
+
+          const eventDescription = document.createElement("span");
+          eventDescription.className = "event-description";
+          if ("description" in data.items[i]) {
+            eventDescription.innerHTML = data.items[i].description;
+            eventInfo.append(eventDescription);
+          }
+
+          const eventTime = document.createElement("span");
+          eventTime.className = "event-time";
+          eventTime.innerHTML = eventDate.toLocaleTimeString("en-US", {
+            timeZone: "America/Chicago",
+            timeStyle: "short",
+          });
+          eventInfo.append(eventTime);
+
+          const event = document.createElement("li");
+          event.className = "event";
+          event.append(eventDay, eventInfo);
+
+          const innerMonthList = document.createElement("ul");
+          innerMonthList.className = "month-events";
+          innerMonthList.appendChild(event);
+          printedEventsCount++;
+
+          eventsList.appendChild(innerMonthList);
+
+          continue;
+        }
       }
 
       if (!eventsList.hasChildNodes()) {
-        document.getElementsByClassName("events")[0].remove();
+        eventsParent.remove();
         const textDiv = document.getElementById("text-id-27-");
         textDiv.innerHTML = "No events for now. Check back later!";
         textDiv.setAttribute("style", "display: block;");
