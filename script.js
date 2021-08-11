@@ -45,6 +45,10 @@ function getCalendarEvents() {
       eventsParent.appendChild(eventsList);
 
       const today = new Date();
+      var currentDay = new Date(data.items[0].start.dateTime).toLocaleString(
+        "default",
+        { day: "numeric" }
+      );
       var currentMonth = new Date(data.items[0].start.dateTime).toLocaleString(
         "default",
         { month: "long" }
@@ -128,8 +132,16 @@ function getCalendarEvents() {
 
           const eventDay = document.createElement("div");
           eventDay.className = "event-day";
-          currentDay = eventDate.toLocaleString("default", { day: "numeric" });
-          eventDay.innerHTML = currentDay;
+
+          if (
+            currentDay !==
+            eventDate.toLocaleString("default", { day: "numeric" })
+          ) {
+            currentDay = eventDate.toLocaleString("default", {
+              day: "numeric",
+            });
+            eventDay.innerHTML = currentDay;
+          }
 
           const eventInfo = document.createElement("div");
           eventInfo.className = "event-info";

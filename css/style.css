@@ -430,7 +430,7 @@
     font-size: 2rem;
     line-height: .9;
     text-align: right;
-    /* min-width: 3rem; */
+    min-width: 2rem;
     padding-right: 1rem;
 }
 
