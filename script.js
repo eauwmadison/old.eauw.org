@@ -38,9 +38,13 @@ function getCalendarEvents() {
         return;
       }
 
-      const sortedData = data.items.sort(function (a, b) {
-        return new Date(b.start.dateTime) - new Date(a.start.dateTime);
-      }).reverse();
+      data.items
+        .sort(function (a, b) {
+          return new Date(b.start.dateTime) - new Date(a.start.dateTime);
+        })
+        .reverse();
+
+      console.log(data.items);
 
       const eventsParent = document.getElementsByClassName("events")[0];
       const eventsList = document.createElement("li");
@@ -84,15 +88,25 @@ function getCalendarEvents() {
 
           const eventTitle = document.createElement("span");
           eventTitle.className = "event-title";
-          eventTitle.innerHTML = data.items[i].summary;
+          eventTitle.innerHTML =
+            '<a href="' +
+            data.items[i].htmlLink +
+            '" target="_blank">' +
+            data.items[i].summary +
+            "</a>";
+
           eventInfo.append(eventTitle);
+
+          tippy(eventTitle.firstChild, {
+            content: "View in Google Calendar",
+            placement: "right",
+            theme: "my",
+          });
 
           if ("location" in data.items[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML =
-              '<i class="fas fa-map-marker-alt fa-fw"></i>' +
-              makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(data.items[i].location);
             eventInfo.append(eventLocation);
           }
 
@@ -154,15 +168,24 @@ function getCalendarEvents() {
 
           const eventTitle = document.createElement("span");
           eventTitle.className = "event-title";
-          eventTitle.innerHTML = data.items[i].summary;
+          eventTitle.innerHTML =
+            '<a href="' +
+            data.items[i].htmlLink +
+            '" target="_blank">' +
+            data.items[i].summary +
+            "</a>";
+
+          tippy(eventTitle.firstChild, {
+            content: "View in Google Calendar",
+            placement: "right",
+            theme: "my",
+          });
           eventInfo.append(eventTitle);
 
           if ("location" in data.items[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML =
-              '<i class="fas fa-map-marker-alt fa-fw"></i>' +
-              makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(data.items[i].location);
             eventInfo.append(eventLocation);
           }
 
@@ -207,15 +230,24 @@ function getCalendarEvents() {
 
           const eventTitle = document.createElement("span");
           eventTitle.className = "event-title";
-          eventTitle.innerHTML = data.items[i].summary;
+          eventTitle.innerHTML =
+            '<a href="' +
+            data.items[i].htmlLink +
+            '" target="_blank">' +
+            data.items[i].summary +
+            "</a>";
           eventInfo.append(eventTitle);
+
+          tippy(eventTitle.firstChild, {
+            content: "View in Google Calendar",
+            placement: "right",
+            theme: "my",
+          });
 
           if ("location" in data.items[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML =
-              '<i class="fas fa-map-marker-alt fa-fw"></i>' +
-              makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(data.items[i].location);
             eventInfo.append(eventLocation);
           }
 
@@ -273,8 +305,34 @@ function somethingWentWrong(err) {
   textDiv.setAttribute("style", "display: block; font-style: italic;");
 }
 
-function makeLocation (location) {
-  return location.split(",")[0];
+function makeLocation(location) {
+  if (isValidUrl(location)) {
+    return (
+      '<i class="fas fa-desktop fa-fw"></i>' +
+      '<a href="' +
+      location +
+      '" target="_blank">' +
+      location +
+      "</a>"
+    );
+  }
+  return (
+    '<i class="fas fa-map-marker-alt fa-fw"></i>' +
+    '<a href="https://maps.google.com/?q=' +
+    location +
+    '" target="_blank" style="text-decoration:none;">' +
+    location.split(",")[0] +
+    "</a>"
+  );
+}
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+  } catch (e) {
+    return false;
+  }
+  return true;
 }
 
 function initAspectJS() {
