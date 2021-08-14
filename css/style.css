@@ -447,3 +447,7 @@
 .event .event-info span {
     display: block;
 }
+
+i {
+    margin-right: 0.25rem;
+}
