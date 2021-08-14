@@ -1,9 +1,11 @@
-#button-id-0- { min-height: 31px; margin: unset; color: rgb(0, 0, 0); font-size: 18px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; background-color: rgba(255, 255, 255, 0); text-align: left; font-weight: 700; border-style: none none solid; border-width: 3px; letter-spacing: 0px; line-height: 18px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+#button-id-0- span {  margin: unset; color: rgb(0, 0, 0); font-size: 18px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; background-color: rgba(255, 255, 255, 0); text-align: left; font-weight: 700; border-style: none none solid; border-width: 3px; letter-spacing: 0px; line-height: 18px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; width: auto; }
 
-#button-id-0-:active, #button-id-0-.active { color: rgb(0, 0, 0); }
+    #button-id-0- i { margin-right: 0.5rem; border-style: none;}
 
-#button-id-0-:hover, #button-id-0-.hover { color: rgba(0, 0, 0, 0.5); }
+#button-id-0- span:active, #button-id-0- span.active { color: rgb(0, 0, 0); }
+
+#button-id-0- span:hover, #button-id-0- span.hover { color: rgba(0, 0, 0, 0.5); }
 
 #button-id-11- { min-height: 31px; margin: unset; color: rgb(0, 0, 0); font-size: 18px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; background-color: rgba(255, 255, 255, 0); text-align: left; font-weight: 700; border-style: none none solid; border-width: 3px; letter-spacing: 0px; line-height: 18px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; width: auto; }
@@ -33,12 +35,14 @@
 
 #button-id-49-:hover, #button-id-49-.hover { color: rgba(0, 0, 0, 0.5); }
 
-#button-id-7- { min-height: 31px; margin: unset; color: rgb(0, 0, 0); font-size: 24px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; background-color: rgba(255, 255, 255, 0); text-align: left; font-weight: 700; border-style: none none solid; border-width: 3px; letter-spacing: 0px; line-height: 18px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+#button-id-7- span { margin: unset; color: rgb(0, 0, 0); font-size: 24px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; background-color: rgba(255, 255, 255, 0); text-align: left; font-weight: 700; border-style: none none solid; border-width: 3px; letter-spacing: 0px; line-height: 18px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; width: auto; }
 
-#button-id-7-:active, #button-id-7-.active { color: rgb(0, 0, 0); }
+#button-id-7- i { font-size: 32px; }
 
-#button-id-7-:hover, #button-id-7-.hover { color: rgba(0, 0, 0, 0.5); }
+#button-id-7- span:active, #button-id-7- span.active { color: rgb(0, 0, 0); }
+
+#button-id-7- span:hover, #button-id-7- span.hover { color: rgba(0, 0, 0, 0.5); }
 
 #container-id-0- { min-height: auto; margin: unset; background-color: rgba(238, 238, 238, 0); width: 100%; flex-direction: column; align-items: flex-start; justify-content: flex-start; }
 
