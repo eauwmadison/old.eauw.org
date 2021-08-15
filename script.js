@@ -303,7 +303,7 @@ function getCalendarEvents() {
           "Last updated " +
           moment(today).fromNow() +
           ' via <a href="https://calendar.google.com/calendar/u/0?cid=Y29udGFjdEBlYXV3Lm9yZw" target="_blank">Google Calendar</a>.';
-      }, 5000);
+      }, 30000);
 
       document.getElementById("container-id-28-").appendChild(lastUpdated);
     })
