@@ -420,6 +420,7 @@
     margin-left: 0;
     margin-top: 0;
     padding-left: 0;
+    width: 100%;
 }
 
 .event {
@@ -469,6 +470,11 @@
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+.last-updated {
+    margin-top: -15px;
+    font-weight: 400;
+    font-size: small;
+}
 
 a {
     color: rgb(0, 0, 0);

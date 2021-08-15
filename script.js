@@ -290,6 +290,22 @@ function getCalendarEvents() {
         textDiv.setAttribute("style", "display: block;");
         return;
       }
+
+      const lastUpdated = document.createElement("div");
+      lastUpdated.className = "last-updated";
+      lastUpdated.innerHTML =
+        "Last updated " +
+        moment(today).fromNow() +
+        ' via <a href="https://calendar.google.com/calendar/u/0?cid=Y29udGFjdEBlYXV3Lm9yZw" target="_blank">Google Calendar</a>.';
+
+      setInterval(function () {
+        lastUpdated.innerHTML =
+          "Last updated " +
+          moment(today).fromNow() +
+          ' via <a href="https://calendar.google.com/calendar/u/0?cid=Y29udGFjdEBlYXV3Lm9yZw" target="_blank">Google Calendar</a>.';
+      }, 5000);
+
+      document.getElementById("container-id-28-").appendChild(lastUpdated);
     })
     .catch(function (err) {
       somethingWentWrong(err);
