@@ -13,6 +13,7 @@ const elementBehaviors = {
   DROPDOWN: "dropdown",
 };
 
+
 function getCalendarEvents() {
   const CALENDAR_ID = "contact%40eauw.org";
   const API_KEY = "AIzaSyDZaZSBkC1GCorg-PhrzswIaCQ4aOmOr24"; // read-only, restricted to https://eauw.org
@@ -25,6 +26,7 @@ function getCalendarEvents() {
   )
     .then(function (res) {
       if (res.ok) {
+        vex.dialog.alert("Success!");
         return res.json();
       } else {
         somethingWentWrong("response invalid.");
