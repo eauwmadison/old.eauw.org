@@ -69,6 +69,9 @@ function getCalendarEvents() {
         // if earlier than today, skip
         if (today > eventDate) continue;
 
+        // if private event, skip
+        if (data.items[i].visibility === "private") continue;
+
         if (!eventsList.hasChildNodes()) {
           const firstEventMonth = document.createElement("div");
           firstEventMonth.className = "event-month";
