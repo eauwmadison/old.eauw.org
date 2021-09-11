@@ -127,6 +127,11 @@ function getCalendarEvents() {
             eventDate.toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
             });
           eventInfo.append(eventTime);
 
@@ -206,6 +211,11 @@ function getCalendarEvents() {
             eventDate.toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
             });
           eventInfo.append(eventTime);
 
@@ -266,6 +276,11 @@ function getCalendarEvents() {
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
             eventDate.toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
