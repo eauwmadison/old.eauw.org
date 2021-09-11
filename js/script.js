@@ -13,6 +13,40 @@ const elementBehaviors = {
   DROPDOWN: "dropdown",
 };
 
+function newsletterPopup() {
+  // vex.dialog.defaultOptions.showCloseButton = true;
+
+  vex.dialog.alert({
+    unsafeMessage: `
+    <form
+      id="email-form"
+      data-element-type="container"
+      data-netlify="true"
+      action="/about/index.html"
+    >
+    <p id="text-id-1-" data-element-type="text">
+      Stay up-to-date!
+    </p>
+    <input
+      id="input-id-27-"
+      data-element-type="input"
+      placeholder="Email"
+      type="email"
+      name="email"
+      required="true"
+    />
+    <button
+      id="button-id-28-"
+      data-element-type="button"
+      type="submit"
+    >
+      <span id="element-id-29-">Subscribe</span>
+    </button>
+  </form>`,
+  });
+}
+
+newsletterPopup();
 
 function getCalendarEvents() {
   const CALENDAR_ID = "contact%40eauw.org";
@@ -26,7 +60,6 @@ function getCalendarEvents() {
   )
     .then(function (res) {
       if (res.ok) {
-        vex.dialog.alert("Success!");
         return res.json();
       } else {
         somethingWentWrong("response invalid.");
