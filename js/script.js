@@ -582,76 +582,14 @@ function bestCSSPositionForPopover(element) {
 
 // forms
 
-function submitAspectForm(form) {
-  const data = {
-    databaseId: form.getAttribute("data-database-id"),
-    uid: form.getAttribute("data-uid"),
-    content: {},
-  };
-
-  if (!data.databaseId) {
-    alert("No database connected to form.");
-    return false;
-  }
-
-  const inputWithUnsetDatabaseField = Array.from(
-    form.getElementsByTagName("input")
-  ).find((x) => !x.getAttribute("data-name"));
-  if (inputWithUnsetDatabaseField) {
-    alert(
-      `Input element "${inputWithUnsetDatabaseField.id}" is not connected to a database field.`
-    );
-    return false;
-  }
-
-  Array.from(form.getElementsByTagName("input")).forEach((input) => {
-    data.content[input.getAttribute("data-name")] = input.value;
-  });
-
-  postRequest(getUrlForType(), data)
-    .then(() => {
-      updateAspectFormState(form, "submitted");
-    })
-    .catch((error) => alert(error.message));
-
-  return false;
-
-  function getUrlForType(type) {
-    switch (type) {
-      // case 'google':
-      //   return `https://docs.google.com/forms/d/${data['form-id']}`;
-
-      default:
-        return `https://api.aspect.app/v1/submit-form`;
+$("#email-form").submit(function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: "https://hooks.zapier.com/hooks/catch/10620681/b453xsj",
+    type: "POST",
+    data: $("#email-form").serialize(),
+    success: function() {
+      window.location = "/about/index.html";
     }
-  }
-
-  function postRequest(url, dict) {
-    return new Promise((resolve, reject) => {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify(dict));
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4) {
-          if (xhr.status == 200) {
-            resolve(xhr.responseText);
-          } else {
-            try {
-              reject(JSON.parse(xhr.responseText));
-            } catch (error) {
-              reject({ message: xhr.responseText });
-            }
-          }
-        }
-      };
-    });
-  }
-}
-
-function updateAspectFormState(form, state) {
-  form.parentElement.classList.remove("submitted-form");
-  if (state == "submitted") {
-    form.parentElement.classList.add("submitted-form");
-  }
-}
+  });
+});
