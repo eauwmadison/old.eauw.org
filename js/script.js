@@ -589,7 +589,7 @@ $("#email-form").submit(function(e) {
     type: "POST",
     data: $("#email-form").serialize(),
     success: function() {
-      window.location = "/about/index.html";
+      window.location = "/success/index.html";
     }
   });
 });
