@@ -38,13 +38,15 @@ function getCalendarEvents() {
         return;
       }
 
-      data.items
+      const finalData = data.items.filter((item) => item.start);
+
+      finalData
         .sort(function (a, b) {
           return new Date(b.start.dateTime) - new Date(a.start.dateTime);
         })
         .reverse();
 
-      console.log(data.items);
+        console.log(finalData);
 
       const eventsParent = document.getElementsByClassName("events")[0];
       const eventsList = document.createElement("li");
@@ -61,16 +63,16 @@ function getCalendarEvents() {
       );
 
       var printedEventsCount = 0;
-      for (var i = 0; i < data.items.length; i++) {
+      for (var i = 0; i < finalData.length; i++) {
         if (printedEventsCount > 4) break;
 
-        const eventDate = new Date(data.items[i].start.dateTime);
+        const eventDate = new Date(finalData[i].start.dateTime);
 
         // if earlier than today, skip
         if (today > eventDate) continue;
 
         // if private event, skip
-        if (data.items[i].visibility === "private") continue;
+        if (finalData[i].visibility === "private") continue;
 
         if (!eventsList.hasChildNodes()) {
           const firstEventMonth = document.createElement("div");
@@ -93,9 +95,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
 
           eventInfo.append(eventTitle);
@@ -106,17 +108,17 @@ function getCalendarEvents() {
             theme: "my",
           });
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
           const eventDescription = document.createElement("span");
           eventDescription.className = "event-description";
-          if ("description" in data.items[i]) {
-            eventDescription.innerHTML = data.items[i].description;
+          if ("description" in finalData[i]) {
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -129,7 +131,7 @@ function getCalendarEvents() {
               timeStyle: "short",
             }) +
             " &ndash; " +
-            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -178,9 +180,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
 
           tippy(eventTitle.firstChild, {
@@ -190,17 +192,17 @@ function getCalendarEvents() {
           });
           eventInfo.append(eventTitle);
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
           const eventDescription = document.createElement("span");
           eventDescription.className = "event-description";
-          if ("description" in data.items[i]) {
-            eventDescription.innerHTML = data.items[i].description;
+          if ("description" in finalData[i]) {
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -213,7 +215,7 @@ function getCalendarEvents() {
               timeStyle: "short",
             }) +
             " &ndash; " +
-            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -245,9 +247,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
           eventInfo.append(eventTitle);
 
@@ -257,17 +259,17 @@ function getCalendarEvents() {
             theme: "my",
           });
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
-          if ("description" in data.items[i]) {
+          if ("description" in finalData[i]) {
             const eventDescription = document.createElement("span");
             eventDescription.className = "event-description";
-            eventDescription.innerHTML = data.items[i].description;
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -280,7 +282,7 @@ function getCalendarEvents() {
               timeStyle: "short",
             }) +
             " &ndash; " +
-            new Date(data.items[i].end.dateTime).toLocaleTimeString("en-US", {
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -582,14 +584,14 @@ function bestCSSPositionForPopover(element) {
 
 // forms
 
-$("#email-form").submit(function(e) {
+$("#email-form").submit(function (e) {
   e.preventDefault();
   $.ajax({
     url: "https://hooks.zapier.com/hooks/catch/10620681/b453xsj",
     type: "POST",
     data: $("#email-form").serialize(),
-    success: function() {
+    success: function () {
       window.location = "/success/index.html";
-    }
+    },
   });
 });
