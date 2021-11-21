@@ -73,13 +73,15 @@ function getCalendarEvents() {
         return;
       }
 
-      data.items
+      const finalData = data.items.filter((item) => item.start);
+
+      finalData
         .sort(function (a, b) {
           return new Date(b.start.dateTime) - new Date(a.start.dateTime);
         })
         .reverse();
 
-      console.log(data.items);
+        console.log(finalData);
 
       const eventsParent = document.getElementsByClassName("events")[0];
       const eventsList = document.createElement("li");
@@ -96,13 +98,16 @@ function getCalendarEvents() {
       );
 
       var printedEventsCount = 0;
-      for (var i = 0; i < data.items.length; i++) {
+      for (var i = 0; i < finalData.length; i++) {
         if (printedEventsCount > 4) break;
 
-        const eventDate = new Date(data.items[i].start.dateTime);
+        const eventDate = new Date(finalData[i].start.dateTime);
 
         // if earlier than today, skip
         if (today > eventDate) continue;
+
+        // if private event, skip
+        if (finalData[i].visibility === "private") continue;
 
         if (!eventsList.hasChildNodes()) {
           const firstEventMonth = document.createElement("div");
@@ -125,9 +130,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
 
           eventInfo.append(eventTitle);
@@ -138,17 +143,17 @@ function getCalendarEvents() {
             theme: "my",
           });
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
           const eventDescription = document.createElement("span");
           eventDescription.className = "event-description";
-          if ("description" in data.items[i]) {
-            eventDescription.innerHTML = data.items[i].description;
+          if ("description" in finalData[i]) {
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -157,6 +162,11 @@ function getCalendarEvents() {
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
             eventDate.toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -205,9 +215,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
 
           tippy(eventTitle.firstChild, {
@@ -217,17 +227,17 @@ function getCalendarEvents() {
           });
           eventInfo.append(eventTitle);
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
           const eventDescription = document.createElement("span");
           eventDescription.className = "event-description";
-          if ("description" in data.items[i]) {
-            eventDescription.innerHTML = data.items[i].description;
+          if ("description" in finalData[i]) {
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -236,6 +246,11 @@ function getCalendarEvents() {
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
             eventDate.toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -267,9 +282,9 @@ function getCalendarEvents() {
           eventTitle.className = "event-title";
           eventTitle.innerHTML =
             '<a href="' +
-            data.items[i].htmlLink +
+            finalData[i].htmlLink +
             '" target="_blank">' +
-            data.items[i].summary +
+            finalData[i].summary +
             "</a>";
           eventInfo.append(eventTitle);
 
@@ -279,17 +294,17 @@ function getCalendarEvents() {
             theme: "my",
           });
 
-          if ("location" in data.items[i]) {
+          if ("location" in finalData[i]) {
             const eventLocation = document.createElement("span");
             eventLocation.className = "event-location";
-            eventLocation.innerHTML = makeLocation(data.items[i].location);
+            eventLocation.innerHTML = makeLocation(finalData[i].location);
             eventInfo.append(eventLocation);
           }
 
-          if ("description" in data.items[i]) {
+          if ("description" in finalData[i]) {
             const eventDescription = document.createElement("span");
             eventDescription.className = "event-description";
-            eventDescription.innerHTML = data.items[i].description;
+            eventDescription.innerHTML = finalData[i].description;
             eventInfo.append(eventDescription);
           }
 
@@ -298,6 +313,11 @@ function getCalendarEvents() {
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
             eventDate.toLocaleTimeString("en-US", {
+              timeZone: "America/Chicago",
+              timeStyle: "short",
+            }) +
+            " &ndash; " +
+            new Date(finalData[i].end.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             });
@@ -599,76 +619,14 @@ function bestCSSPositionForPopover(element) {
 
 // forms
 
-function submitAspectForm(form) {
-  const data = {
-    databaseId: form.getAttribute("data-database-id"),
-    uid: form.getAttribute("data-uid"),
-    content: {},
-  };
-
-  if (!data.databaseId) {
-    alert("No database connected to form.");
-    return false;
-  }
-
-  const inputWithUnsetDatabaseField = Array.from(
-    form.getElementsByTagName("input")
-  ).find((x) => !x.getAttribute("data-name"));
-  if (inputWithUnsetDatabaseField) {
-    alert(
-      `Input element "${inputWithUnsetDatabaseField.id}" is not connected to a database field.`
-    );
-    return false;
-  }
-
-  Array.from(form.getElementsByTagName("input")).forEach((input) => {
-    data.content[input.getAttribute("data-name")] = input.value;
+$("#email-form").submit(function (e) {
+  e.preventDefault();
+  $.ajax({
+    url: "https://hooks.zapier.com/hooks/catch/10620681/b453xsj",
+    type: "POST",
+    data: $("#email-form").serialize(),
+    success: function () {
+      window.location = "/success/index.html";
+    },
   });
-
-  postRequest(getUrlForType(), data)
-    .then(() => {
-      updateAspectFormState(form, "submitted");
-    })
-    .catch((error) => alert(error.message));
-
-  return false;
-
-  function getUrlForType(type) {
-    switch (type) {
-      // case 'google':
-      //   return `https://docs.google.com/forms/d/${data['form-id']}`;
-
-      default:
-        return `https://api.aspect.app/v1/submit-form`;
-    }
-  }
-
-  function postRequest(url, dict) {
-    return new Promise((resolve, reject) => {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify(dict));
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4) {
-          if (xhr.status == 200) {
-            resolve(xhr.responseText);
-          } else {
-            try {
-              reject(JSON.parse(xhr.responseText));
-            } catch (error) {
-              reject({ message: xhr.responseText });
-            }
-          }
-        }
-      };
-    });
-  }
-}
-
-function updateAspectFormState(form, state) {
-  form.parentElement.classList.remove("submitted-form");
-  if (state == "submitted") {
-    form.parentElement.classList.add("submitted-form");
-  }
-}
+});

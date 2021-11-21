@@ -1,24 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Effective Altruism UW&ndash;Madison</title>
+
+    <!-- meta tags -->
     <meta charset="utf-8" />
-    <title>Effective Altruism &mdash; UW&ndash;Madison</title>
+    <meta
+      name="description"
+      content="We are a group of students at UW&ndash;Madison with the common desire to do the most good we can."
+    />
+    <meta property="og:url" content="https://eauw.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Effective Altruism UW–Madison" />
+    <meta
+      property="og:description"
+      content="We are a group of students at UW&ndash;Madison with the common desire to do the most good we can."
+    />
+    <meta property="og:image" content="/img/banner-smaller.png" />
+    <meta property="twitter:domain" content="eauw.org" />
+    <meta property="twitter:url" content="https://eauw.org/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+
+    <!-- favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/ico/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/ico/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/ico/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/ico/site.webmanifest" />
+    <link rel="mask-icon" href="/ico/safari-pinned-tab.svg" color="#35aac2" />
+    <link rel="shortcut icon" href="/ico/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="EA UW&ndash;Madison" />
+    <meta name="application-name" content="EA UW&ndash;Madison" />
+    <meta name="msapplication-TileColor" content="#d0e4e8" />
+    <meta name="msapplication-config" content="/ico/browserconfig.xml" />
+    <meta name="theme-color" content="#d0e4e8" />
+
+    <!-- fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link href="css/elements.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/vex.css" />
-    <link rel="stylesheet" href="css/vex-theme-wireframe.css" />
 
     <script
       src="https://kit.fontawesome.com/2b35e745a2.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- styles -->
+    <link href="css/elements.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/vex.css" />
+    <link rel="stylesheet" href="css/vex-theme-wireframe.css" />
   </head>
   <body id="root-container" style="margin: 0" onload="initAspectJS()">
     <div id="content-container">
@@ -32,7 +77,7 @@
               <div id="container-id-7-" data-element-type="container"></div>
               <div id="container-id-4-" data-element-type="container">
                 <p id="text-id-3-" data-element-type="text">
-                  contact@eauw.org<br />
+                  <a href="mailto:contact@eauw.org">contact@eauw.org</a><br />
                 </p>
                 <a
                   data-element-behavior="dropdown"
@@ -46,7 +91,7 @@
           </div>
           <div id="container-id-3-" data-element-type="container">
             <a id="image-id-4-" data-element-type="image"
-              ><img id="element-id-5-" src="img/SEA.jpg"
+              ><img id="element-id-5-" src="img/madison.jpg"
             /></a>
             <div id="container-id-8-" data-element-type="container">
               <p id="text-id-7-" data-element-type="text">About</p>
@@ -84,7 +129,7 @@
               <a
                 id="button-id-7-"
                 data-element-type="button"
-                href="https://join.slack.com/t/wisc-1na6437/shared_invite/zt-th7k9a36-IjGCeN99H_pyyKD875q2mg"
+                href="https://join.slack.com/t/eauwmadison/shared_invite/zt-v80aagtu-eSGM~zQjpoI1ZdUfX~Ce~g"
                 ><span id="element-id-6-">Slack</span></a
               ><a
                 id="button-id-11-"
@@ -92,6 +137,13 @@
                 href="https://linkedin.com/company/eauw"
                 target="_blank"
                 ><span id="element-id-10-">LinkedIn</span></a
+              >
+              <a
+                id="button-id-11-"
+                data-element-type="button"
+                href="https://www.youtube.com/channel/UCvQu2QhWLNPZwVA-41lXnqQ"
+                target="_blank"
+                ><span id="element-id-10-">YouTube</span></a
               >
               <a
                 id="button-id-11-"
@@ -131,13 +183,7 @@
                   id="form-id-30-"
                   data-element-type="section"
                 >
-                  <form
-                    id="email-form"
-                    data-element-type="container"
-                    data-netlify="true"
-                    action="/about/index.html"
-                    data-uid="eHhKTYIADFdmMxm2GFYI6lC5z7v1"
-                  >
+                  <form id="email-form" data-element-type="container">
                     <p id="text-id-1-" data-element-type="text">
                       Stay up-to-date!
                     </p>
@@ -177,7 +223,7 @@
           data-item-of="button-id-49-popover"
           spellcheck="false"
           contenteditable="false"
-          href="https://join.slack.com/t/wisc-1na6437/shared_invite/zt-th7k9a36-IjGCeN99H_pyyKD875q2mg"
+          href="https://join.slack.com/t/eauwmadison/shared_invite/zt-v80aagtu-eSGM~zQjpoI1ZdUfX~Ce~g"
           target="_blank"
           ><i class="fab fa-slack fa-fw"></i>Slack</a
         >
@@ -190,7 +236,18 @@
           href="https://linkedin.com/company/eauw"
           target="_blank"
           ><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a
-        ><a
+        >
+        <a
+          id="link-id-52-"
+          data-element-type="link"
+          data-item-of="button-id-49-popover"
+          spellcheck="false"
+          contenteditable="false"
+          href="https://www.youtube.com/channel/UCvQu2QhWLNPZwVA-41lXnqQ"
+          target="_blank"
+          ><i class="fab fa-youtube fa-fw"></i>YouTube</a
+        >
+        <a
           id="link-id-70-"
           data-element-type="link"
           data-item-of="button-id-49-popover"
@@ -207,6 +264,7 @@
     <script>
       vex.defaultOptions.className = "vex-theme-wireframe";
     </script>
+    <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/tippy.min.js"></script>
     <script src="/js/moment.min.js"></script>
