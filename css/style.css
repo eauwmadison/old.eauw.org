@@ -108,6 +108,8 @@
 
 #container-id-28- > :last-child { margin-right: 0px !important; margin-bottom: 0px !important; }
 
+#container-id-55- { width: 100% }
+
 #container-id-3- { min-height: 171px; margin: unset; background-color: rgba(238, 238, 238, 0); width: 100%; flex-direction: row; }
 
 #container-id-3- > * { max-width: 100%; margin-right: 40px !important; margin-bottom: 0px !important; }
