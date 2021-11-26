@@ -145,10 +145,12 @@
 
 #image-id-4- { margin: unset; background-color: rgb(221, 221, 221); width: 400px; border: 4px none rgb(35, 35, 35); min-height: auto; }
 
-#input-id-27- { margin: unset; border: 1px none rgb(204, 204, 204); padding: 0px 12px; font-size: 14px; line-height: 16px; min-height: 40px; width: 320px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+#container-id-55- { width: 320px; }
+
+#input-id-27-, #input-id-53- { margin: unset; border: 1px none rgb(204, 204, 204); width: 49%; padding: 0px 1%; font-size: 14px; line-height: 16px; min-height: 40px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; font-family: "kumbh sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
 
-#input-id-27-:focus, #input-id-27-.focus { border-color: rgb(1, 122, 255) !important; }
+#input-id-27-:focus, #input-id-27-.focus, #input-id-53-:focus, #input-id-53-.focus { border-color: rgb(1, 122, 255) !important; }
 
 #root-container { background-color: rgb(184, 228, 233); background-position: center center; }
 
@@ -275,6 +277,8 @@
 #container-id-8- { width: 520px; flex-direction: column; }
 
 #container-id-8- > * { max-width: 100%; }
+
+#container-id-55- { display: flex; flex-direction: row; }
 
 #content-container { flex-direction: column; align-items: flex-start; justify-content: flex-start; display: flex; }
 
