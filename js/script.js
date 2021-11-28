@@ -46,8 +46,6 @@ function getCalendarEvents() {
         })
         .reverse();
 
-        console.log(finalData);
-
       const eventsParent = document.getElementsByClassName("events")[0];
       const eventsList = document.createElement("li");
       eventsParent.appendChild(eventsList);
