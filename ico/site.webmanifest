@@ -1,6 +1,6 @@
 {
     "name": "EA UW\u2013Madison",
-    "short_name": "EA UW\u2013Madison",
+    "short_name": "EA UW",
     "icons": [
         {
             "src": "/ico/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#068294",
+    "background_color": "#CBE5E9",
     "display": "standalone"
 }
