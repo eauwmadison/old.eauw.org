@@ -585,7 +585,7 @@ function bestCSSPositionForPopover(element) {
 $("#email-form").submit(function (e) {
   e.preventDefault();
   $.ajax({
-    url: "https://hooks.zapier.com/hooks/catch/10620681/bde1mrr/",
+    url: "https://api.eauw.org/email",
     type: "POST",
     data: $("#email-form").serialize(),
     success: function () {
