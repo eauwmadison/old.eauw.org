@@ -587,7 +587,10 @@ $("#email-form").submit(function (e) {
   $.ajax({
     url: "https://api.eauw.org/email",
     type: "POST",
-    data: $("#email-form").serialize(),
+    data: {
+      firstName: document.getElementById('input-id-53-').value,
+      email: document.getElementById('input-id-27-').value
+    },
     success: function () {
       window.location = "/success/index.html";
     },
