@@ -588,8 +588,8 @@ $("#email-form").submit(function (e) {
     url: "https://api.eauw.org/email",
     type: "POST",
     data: {
-      firstName: document.getElementById('input-id-53-').value,
-      email: document.getElementById('input-id-27-').value
+      "firstName": document.getElementById('input-id-53-').value,
+      "email": document.getElementById('input-id-27-').value
     },
     success: function () {
       window.location = "/success/index.html";
