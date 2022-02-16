@@ -13,40 +13,23 @@ const elementBehaviors = {
   DROPDOWN: "dropdown",
 };
 
-function newsletterPopup() {
-  // vex.dialog.defaultOptions.showCloseButton = true;
+function fellowshipPopup() {
+  vex.dialog.defaultOptions.showCloseButton = true;
 
-  vex.dialog.alert({
-    unsafeMessage: `
-    <form
-      id="email-form"
-      data-element-type="container"
-      data-netlify="true"
-      action="/about/index.html"
-    >
-    <p id="text-id-1-" data-element-type="text">
-      Stay up-to-date!
-    </p>
-    <input
-      id="input-id-27-"
-      data-element-type="input"
-      placeholder="Email"
-      type="email"
-      name="email"
-      required="true"
-    />
-    <button
-      id="button-id-28-"
-      data-element-type="button"
-      type="submit"
-    >
-      <span id="element-id-29-">Subscribe</span>
-    </button>
-  </form>`,
-  });
+  vex.dialog.open({          
+    unsafeMessage: `<h1>Fellowship applications are now open!</h1><p>Application deadline Friday, February 18th.</p>`, 
+    callback: function (value) {
+      if (value)
+        window.location.href = "https://eauw.org/apply";
+    },
+    buttons: [
+        $.extend({}, vex.dialog.buttons.YES, { text: 'Apply' }),
+    ]
+ });
+
 }
 
-newsletterPopup();
+fellowshipPopup();
 
 function getCalendarEvents() {
   const CALENDAR_ID = "contact%40eauw.org";

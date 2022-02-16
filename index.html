@@ -273,7 +273,19 @@
 
     <script src="/js/vex.combined.min.js"></script>
     <script>
-      vex.defaultOptions.className = "vex-theme-wireframe";
+      vex.defaultOptions = {
+        content: "",
+        unsafeContent: "",
+        showCloseButton: true,
+        escapeButtonCloses: true,
+        overlayClosesOnClick: true,
+        appendLocation: "body",
+        className: "vex-theme-wireframe",
+        overlayClassName: "",
+        contentClassName: "",
+        closeClassName: "",
+        closeAllOnPopState: true,
+      };
     </script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
