@@ -81,8 +81,6 @@ function getCalendarEvents() {
         })
         .reverse();
 
-        console.log(finalData);
-
       const eventsParent = document.getElementsByClassName("events")[0];
       const eventsList = document.createElement("li");
       eventsParent.appendChild(eventsList);
@@ -622,9 +620,15 @@ function bestCSSPositionForPopover(element) {
 $("#email-form").submit(function (e) {
   e.preventDefault();
   $.ajax({
-    url: "https://hooks.zapier.com/hooks/catch/10620681/b453xsj",
+    url: "https://api.eauw.org/email",
     type: "POST",
-    data: $("#email-form").serialize(),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      firstName: $("#email-form input[name=firstName]").val(),
+      email: $("#email-form input[name=email]").val(),
+    }),
     success: function () {
       window.location = "/success/index.html";
     },
