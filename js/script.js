@@ -13,6 +13,24 @@ const elementBehaviors = {
   DROPDOWN: "dropdown",
 };
 
+function fellowshipPopup() {
+  vex.dialog.defaultOptions.showCloseButton = true;
+
+  vex.dialog.open({          
+    unsafeMessage: `<h1>Fellowship applications are now open!</h1><p>Application deadline Friday, February 18th.</p>`, 
+    callback: function (value) {
+      if (value)
+        window.location.href = "https://eauw.org/apply";
+    },
+    buttons: [
+        $.extend({}, vex.dialog.buttons.YES, { text: 'Apply' }),
+    ]
+ });
+
+}
+
+fellowshipPopup();
+
 function getCalendarEvents() {
   const CALENDAR_ID = "contact%40eauw.org";
   const API_KEY = "AIzaSyDZaZSBkC1GCorg-PhrzswIaCQ4aOmOr24"; // read-only, restricted to https://eauw.org

@@ -53,6 +53,7 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
+
     <script
       src="https://kit.fontawesome.com/2b35e745a2.js"
       crossorigin="anonymous"
@@ -61,6 +62,8 @@
     <!-- styles -->
     <link href="css/elements.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/vex.css" />
+    <link rel="stylesheet" href="css/vex-theme-wireframe.css" />
   </head>
   <body id="root-container" style="margin: 0" onload="initAspectJS()">
     <div id="content-container">
@@ -268,6 +271,22 @@
       </div>
     </div>
 
+    <script src="/js/vex.combined.min.js"></script>
+    <script>
+      vex.defaultOptions = {
+        content: "",
+        unsafeContent: "",
+        showCloseButton: true,
+        escapeButtonCloses: true,
+        overlayClosesOnClick: true,
+        appendLocation: "body",
+        className: "vex-theme-wireframe",
+        overlayClassName: "",
+        contentClassName: "",
+        closeClassName: "",
+        closeAllOnPopState: true,
+      };
+    </script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/tippy.min.js"></script>
