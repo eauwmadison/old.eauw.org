@@ -17,7 +17,7 @@ function fellowshipPopup() {
   vex.dialog.defaultOptions.showCloseButton = true;
 
   vex.dialog.open({          
-    unsafeMessage: `<h1>Fellowship applications are now open!</h1><p>Application deadline Friday, February 18th.</p>`, 
+    unsafeMessage: `<h1>Fellowship applications are now open!</h1><p>Application deadline Friday, February 20th.</p>`, 
     callback: function (value) {
       if (value)
         window.location.href = "https://eauw.org/apply";
