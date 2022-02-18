@@ -82,7 +82,7 @@ function getCalendarEvents() {
       for (var i = 0; i < finalData.length; i++) {
         if (printedEventsCount > 4) break;
 
-        const eventDate = new Date(finalData[i].start.dateTime);
+        const eventDate = new Date(finalData[i].end.dateTime);
 
         // if earlier than today, skip
         if (today > eventDate) continue;
@@ -142,7 +142,7 @@ function getCalendarEvents() {
           eventTime.className = "event-time";
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
-            eventDate.toLocaleTimeString("en-US", {
+            new Date(finalData[i].start.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             }) +
@@ -226,7 +226,7 @@ function getCalendarEvents() {
           eventTime.className = "event-time";
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
-            eventDate.toLocaleTimeString("en-US", {
+            new Date(finalData[i].start.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             }) +
@@ -293,7 +293,7 @@ function getCalendarEvents() {
           eventTime.className = "event-time";
           eventTime.innerHTML =
             '<i class="fas fa-clock fa-fw"></i>' +
-            eventDate.toLocaleTimeString("en-US", {
+            new Date(finalData[i].start.dateTime).toLocaleTimeString("en-US", {
               timeZone: "America/Chicago",
               timeStyle: "short",
             }) +
