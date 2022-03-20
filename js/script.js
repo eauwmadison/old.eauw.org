@@ -602,7 +602,7 @@ function bestCSSPositionForPopover(element) {
 
 $("#email-form").submit(function (e) {
   e.preventDefault();
-  if ($("#email-form input[name=contact-me-by-fax-only]").val() != 0) {
+  if ($("#email-form input[name=contact-me-by-fax-only]").val() == 0) {
     $.ajax({
       url: "https://api.eauw.org/email",
       type: "POST",
@@ -613,6 +613,24 @@ $("#email-form").submit(function (e) {
         firstName: $("#email-form input[name=firstName]").val(),
         email: $("#email-form input[name=email]").val(),
         source: "eauw.org",
+        likelySpam: "false",
+      }),
+      success: function () {
+        window.location = "/success/index.html";
+      },
+    });
+  } else {
+    $.ajax({
+      url: "https://api.eauw.org/email",
+      type: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        firstName: $("#email-form input[name=firstName]").val(),
+        email: $("#email-form input[name=email]").val(),
+        source: "eauw.org",
+        likelySpam: "true",
       }),
       success: function () {
         window.location = "/success/index.html";
