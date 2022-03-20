@@ -602,18 +602,20 @@ function bestCSSPositionForPopover(element) {
 
 $("#email-form").submit(function (e) {
   e.preventDefault();
-  $.ajax({
-    url: "https://api.eauw.org/email",
-    type: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      firstName: $("#email-form input[name=firstName]").val(),
-      email: $("#email-form input[name=email]").val(),
-    }),
-    success: function () {
-      window.location = "/success/index.html";
-    },
-  });
+  if ($("input#contact-me-by-fax-only").val().length == 0) {
+    $.ajax({
+      url: "https://api.eauw.org/email",
+      type: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        firstName: $("#email-form input[name=firstName]").val(),
+        email: $("#email-form input[name=email]").val(),
+      }),
+      success: function () {
+        window.location = "/success/index.html";
+      },
+    });
+  }
 });
