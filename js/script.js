@@ -602,7 +602,7 @@ function bestCSSPositionForPopover(element) {
 
 $("#email-form").submit(function (e) {
   e.preventDefault();
-  if ($("input#contact-me-by-fax-only").val().length == 0) {
+  if ($("input#contact-me-by-fax-only").val() != 0) {
     $.ajax({
       url: "https://api.eauw.org/email",
       type: "POST",
@@ -612,6 +612,7 @@ $("#email-form").submit(function (e) {
       data: JSON.stringify({
         firstName: $("#email-form input[name=firstName]").val(),
         email: $("#email-form input[name=email]").val(),
+        source: "eauw.org",
       }),
       success: function () {
         window.location = "/success/index.html";
