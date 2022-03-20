@@ -613,7 +613,7 @@ $("#email-form").submit(function (e) {
         firstName: $("#email-form input[name=firstName]").val(),
         email: $("#email-form input[name=email]").val(),
         source: "eauw.org",
-        likelySpam: "false",
+        likelySpam: false,
       }),
       success: function () {
         window.location = "/success/index.html";
@@ -630,7 +630,7 @@ $("#email-form").submit(function (e) {
         firstName: $("#email-form input[name=firstName]").val(),
         email: $("#email-form input[name=email]").val(),
         source: "eauw.org",
-        likelySpam: "true",
+        likelySpam: true,
       }),
       success: function () {
         window.location = "/success/index.html";
