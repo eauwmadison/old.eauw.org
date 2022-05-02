@@ -611,6 +611,7 @@ $("#email-form").submit(function (e) {
     data: JSON.stringify({
       firstName: $("#email-form input[name=firstName]").val(),
       email: $("#email-form input[name=email]").val(),
+      source: "website"
     }),
     success: function () {
       window.location = "/success/index.html";
