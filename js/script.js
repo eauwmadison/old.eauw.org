@@ -29,7 +29,7 @@ function fellowshipPopup() {
 
 }
 
-fellowshipPopup();
+//fellowshipPopup();
 
 function getCalendarEvents() {
   const CALENDAR_ID = "contact%40eauw.org";
